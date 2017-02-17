@@ -7,10 +7,12 @@
 
 exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 exec --no-startup-id nitrogen --restore
-#seq 0 3 | xargs -l1 -I@ compton -b -d :0.@  # Multihead support
-exec --no-startup-id compton
+exec --no-startup-id seq 0 3 | xargs -l1 -I@ compton -b -d :0.@  # Multihead support
+#exec --no-startup-id compton
 exec --no-startup-id urxvtd
 exec --no-startup-id redshift -l 52.954783:-1.158109  -m randr
+exec --no-startup-id xset dpms 130
+exec --no-startup-id xautolock -time 2 -locker ~/.config/i3/lock.sh
 
 # i3 config file (v4)
 #
@@ -159,7 +161,9 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	position top
+	position	top
         status_command i3status
         tray_output primary
 }
+
+bindsym $mod+Ctrl+l exec ~/.config/i3/lock.sh
